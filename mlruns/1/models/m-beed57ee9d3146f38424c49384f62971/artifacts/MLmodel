@@ -1,0 +1,23 @@
+artifact_path: file:E:/Machine-Failure-Prediction/mlruns/1/models/m-beed57ee9d3146f38424c49384f62971/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.skops
+    predict_fn: predict
+    python_version: 3.14.3
+  sklearn:
+    code: null
+    pickled_model: model.skops
+    serialization_format: skops
+    sklearn_version: 1.8.0
+    skops_trusted_types: null
+mlflow_version: 3.15.2
+model_id: m-beed57ee9d3146f38424c49384f62971
+model_size_bytes: 4093218
+model_uuid: m-beed57ee9d3146f38424c49384f62971
+prompts: null
+run_id: ec866a20a04d4de2973e098522f3c2ed
+utc_time_created: '2026-08-26 14:26:09.398566'
