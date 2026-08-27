@@ -1,0 +1,10 @@
+stages:
+  train:
+    cmd: python src/train_mlflow.py
+    deps:
+      - data/ai4i2020.csv
+      - src/train_mlflow.py
+      - src/data_validation.py
+      - src/preprocessing.py
+    outs:
+      - models/best_random_forest.pkl

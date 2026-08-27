@@ -1,0 +1,26 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python src/train_mlflow.py
+    deps:
+    - path: data/ai4i2020.csv
+      hash: md5
+      md5: f0adaa9c5e25366c6df1cc2684479871
+      size: 522048
+    - path: src/data_validation.py
+      hash: md5
+      md5: c43caef35705f5d4ee9892ee704c330e
+      size: 2617
+    - path: src/preprocessing.py
+      hash: md5
+      md5: d6500097681a3985240f46e11aa29e7f
+      size: 754
+    - path: src/train_mlflow.py
+      hash: md5
+      md5: e894acbaec70cee628c24d6698dcf310
+      size: 13663
+    outs:
+    - path: models/best_random_forest.pkl
+      hash: md5
+      md5: 86debb0e77f37c2359e5abb04cad0523
+      size: 2432681
