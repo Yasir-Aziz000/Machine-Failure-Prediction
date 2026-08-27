@@ -9,3 +9,5 @@ plotly
 mlflow
 dvc
 PyYAML
+fastapi
+uvicorn

@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
-
+from src.monitoring import log_prediction
 from utils import (
     load_models,
     load_threshold,
@@ -208,7 +208,15 @@ if analyze_button:
         anomaly_error > anomaly_threshold
     )
 
+    # --------------------------------------------------
+    # MODEL MONITORING
+# --------------------------------------------------
 
+    log_prediction(
+        prediction=prediction,
+        probability=probability,
+        anomaly_score=anomaly_error
+    )
     # --------------------------------------------------
     # RISK LEVEL
     # --------------------------------------------------
@@ -418,7 +426,97 @@ if len(st.session_state.history) > 0:
         history_df["Failure Probability (%)"]
     )
 
+# --------------------------------------------------
+# MODEL MONITORING
+# --------------------------------------------------
 
+from pathlib import Path
+import json
+
+
+monitoring_file = Path(
+    "monitoring_metrics.json"
+)
+
+
+if monitoring_file.exists():
+
+    st.divider()
+
+    st.subheader(
+        "📊 Model Monitoring"
+    )
+
+    with open(
+        monitoring_file,
+        "r"
+    ) as file:
+
+        monitoring_data = json.load(
+            file
+        )
+
+
+    monitoring_df = pd.DataFrame(
+        monitoring_data
+    )
+
+
+    if len(monitoring_df) > 0:
+
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+
+            st.metric(
+                "Total Predictions",
+                len(monitoring_df)
+            )
+
+
+        with col2:
+
+            average_probability = (
+                monitoring_df[
+                    "failure_probability"
+                ].mean() * 100
+            )
+
+            st.metric(
+                "Average Failure Risk",
+                f"{average_probability:.2f}%"
+            )
+
+
+        with col3:
+
+            anomaly_count = (
+                monitoring_df[
+                    "anomaly_score"
+                ].mean()
+            )
+
+            st.metric(
+                "Average Anomaly Score",
+                f"{anomaly_count:.4f}"
+            )
+
+
+        st.subheader(
+            "Failure Probability Over Time"
+        )
+
+
+        monitoring_chart = (
+            monitoring_df
+            .set_index("timestamp")
+            ["failure_probability"]
+        )
+
+
+        st.line_chart(
+            monitoring_chart
+        )
 # --------------------------------------------------
 # FOOTER
 # --------------------------------------------------

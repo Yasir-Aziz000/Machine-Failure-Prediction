@@ -1,7 +1,10 @@
-# MLflow local database and runs
-mlflow.db
-mlruns/
+# Monitoring output
+monitoring_metrics.json
 
-# Python cache
+# Python
 __pycache__/
 *.pyc
+
+# MLflow
+mlruns/
+mlflow.db
