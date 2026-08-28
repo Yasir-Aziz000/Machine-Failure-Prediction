@@ -1,0 +1,6 @@
+[cache]
+    dir = cache
+[core]
+    remote = localremote
+['remote "localremote"']
+    url = E:\Machine-Failure-Prediction\dvc_remote
