@@ -1,8 +1,10 @@
 pandas
 numpy
 scikit-learn
-torch
 streamlit
+joblib
+torch
+matplotlib
 plotly
 mlflow
 dvc
